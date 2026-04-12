@@ -2,11 +2,11 @@ import type { Product } from "@/data/products";
 
 export function SpecsTable({ product }: { product: Product }) {
   const specs = [
-    { label: "Top Speed", value: product.topSpeed },
+    { label: "Top Speed", value: product.top_speed },
     { label: "Certified Range", value: product.range },
-    { label: "Charging Time", value: product.chargingTime },
-    { label: "Battery Capacity", value: product.batteryCapacity },
-    { label: "Motor Type", value: product.motorType },
+    { label: "Charging Time", value: product.charging_time },
+    { label: "Battery Capacity", value: product.battery_capacity },
+    { label: "Motor Type", value: product.motor_type },
   ];
 
   return (
@@ -35,7 +35,7 @@ export function SpecsTable({ product }: { product: Product }) {
       <div className="p-6 md:p-8 bg-black/40 border-t border-white/10">
         <h4 className="text-sm font-semibold text-text-primary mb-4 uppercase tracking-wider">Key Features</h4>
         <div className="flex flex-wrap gap-2">
-          {product.features.map((feature, idx) => (
+          {product.features?.map((feature, idx) => (
             <span 
               key={idx} 
               className="px-4 py-2 rounded-full text-xs font-medium bg-brand-green/10 text-brand-green border border-brand-green/20"

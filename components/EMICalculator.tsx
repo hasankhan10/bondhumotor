@@ -47,7 +47,7 @@ export function EMICalculator({ price }: { price: number }) {
           step={5000}
           value={downpayment}
           onChange={(e) => setDownpayment(Number(e.target.value))}
-          className="w-full accent-brand-blue h-2 bg-card-border rounded-lg appearance-none cursor-pointer hover:accent-brand-green transition-all"
+          className="w-full accent-brand-blue h-1.5 bg-white/10 hover:bg-white/20 rounded-lg appearance-none cursor-pointer hover:accent-brand-green transition-all"
         />
         <div className="flex justify-between mt-2 text-xs text-text-muted font-mono">
           <span>₹0</span>

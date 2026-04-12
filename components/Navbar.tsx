@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Bolt, Sun, Moon } from "lucide-react";
+import { Menu, X, Bolt, Sun, Moon, Lock } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useTheme } from "next-themes";
 
@@ -51,15 +51,15 @@ export function Navbar() {
         
         {/* Left: Logo */}
         <div className="flex items-center justify-start">
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative flex items-center justify-center w-10 h-10 rounded-full bg-card-bg/50 group-hover:bg-brand-blue/20 transition-colors border border-card-border group-hover:border-brand-blue/50">
-              <Bolt className="w-5 h-5 text-brand-blue group-hover:text-brand-green transition-colors" />
+          <Link href="/" className="flex items-center gap-2 md:gap-3 group">
+            <div className="relative flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-full bg-card-bg/50 group-hover:bg-brand-blue/20 transition-colors border border-card-border group-hover:border-brand-blue/50">
+              <Bolt className="w-4 h-4 md:w-5 md:h-5 text-brand-blue group-hover:text-brand-green transition-colors" />
             </div>
             <div className="flex flex-col">
-              <span className="font-heading font-bold text-lg leading-tight tracking-wide text-text-primary">
+              <span className="font-heading font-bold text-base md:text-lg leading-tight tracking-wide text-text-primary">
                 BONDHU <span className="text-gradient">MOTOR</span>
               </span>
-              <span className="text-[10px] text-text-muted tracking-widest uppercase">
+              <span className="text-[8px] md:text-[10px] text-text-muted tracking-[0.3em] uppercase">
                 Tarmac Showroom
               </span>
             </div>
@@ -90,6 +90,14 @@ export function Navbar() {
 
         {/* Right: Actions */}
         <div className="hidden md:flex items-center justify-end gap-4">
+          <Link
+            href="/admin/login"
+            className="p-2.5 rounded-full bg-card-bg/50 border border-card-border text-text-muted hover:text-brand-blue hover:border-brand-blue/50 transition-all focus:outline-none"
+            aria-label="Admin Login"
+            title="Admin Login"
+          >
+            <Lock className="w-4 h-4" />
+          </Link>
           <button
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             className="p-2.5 rounded-full bg-card-bg/50 border border-card-border text-text-primary hover:text-brand-blue hover:border-brand-blue/50 transition-all focus:outline-none"
@@ -130,11 +138,11 @@ export function Navbar() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
+            exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="absolute top-full left-0 right-0 glass-card mx-4 mt-2 rounded-2xl p-4 flex flex-col gap-4 shadow-xl z-50 md:hidden border border-card-border"
+            className="absolute top-full left-0 right-0 glass-card mx-4 mt-3 rounded-2xl p-4 flex flex-col gap-3 shadow-2xl z-50 md:hidden border border-white/10 backdrop-blur-2xl"
           >
             {links.map((link) => (
               <Link
@@ -155,6 +163,13 @@ export function Navbar() {
               className="mt-2 text-center p-3 rounded-xl bg-brand-green text-gray-900 font-bold"
             >
               Book Test Ride
+            </Link>
+            <Link
+              href="/admin/login"
+              className="flex items-center justify-center gap-2 p-3 rounded-xl text-text-muted hover:bg-card-bg text-sm"
+            >
+              <Lock className="w-4 h-4" />
+              Admin Login
             </Link>
           </motion.div>
         )}

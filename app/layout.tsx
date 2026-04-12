@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { SmoothScroll } from "@/components/SmoothScroll";
-import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
-import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { LayoutShell } from "@/components/LayoutShell";
+import Script from "next/script";
 import "./globals.css";
+
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -70,19 +70,19 @@ export default function RootLayout({
       className={`${spaceGrotesk.variable} ${inter.variable} antialiased`}
     >
       <body className="min-h-screen bg-background text-foreground flex flex-col font-body transition-colors duration-300">
-        <script
+        <Script
+          id="local-business-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
         />
+
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <SmoothScroll>
-            <Navbar />
-            <main className="flex-1 flex flex-col pt-24">{children}</main>
-            <Footer />
-            <WhatsAppButton />
+            <LayoutShell>{children}</LayoutShell>
           </SmoothScroll>
         </ThemeProvider>
       </body>
+
     </html>
   );
 }

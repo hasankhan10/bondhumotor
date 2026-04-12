@@ -4,153 +4,22 @@ export interface Product {
   brand: string;
   model: string;
   name: string;
-  price: number;
-  priceFormatted: string;
+  market_price: number;
+  showroom_price: number;
   range: string;
-  topSpeed: string;
-  chargingTime: string;
-  batteryCapacity: string;
-  motorType: string;
+  top_speed: string;
+  charging_time: string;
+  battery_capacity: string;
+  motor_type: string;
   description: string;
   image: string;
+  images: string[];
   features: string[];
+  stock_status: string;
+  display_order: number;
+  is_featured: boolean;
 }
 
-export const products: Product[] = [
-  {
-    id: "1",
-    slug: "tarmac-alpha-pro",
-    brand: "TARMAC",
-    model: "Alpha Pro",
-    name: "TARMAC Alpha Pro",
-    price: 147499,
-    priceFormatted: "₹1,47,499",
-    range: "195 km",
-    topSpeed: "120 kmph",
-    chargingTime: "6.5 hrs",
-    batteryCapacity: "4.0 kWh",
-    motorType: "Mid Drive IPM",
-    description: "The TARMAC Alpha Pro represents the pinnacle of electric mobility with unmatched range, blistering speed, and cutting-edge software features.",
-    image: "/images/products/tarmac-alpha-pro.webp",
-    features: ["Hyper Mode", "Cruise Control", "Built-in Speakers", "Keyless Entry"],
-  },
-  {
-    id: "2",
-    slug: "tarmac-alpha-lite",
-    brand: "TARMAC",
-    model: "Alpha Lite",
-    name: "TARMAC Alpha Lite",
-    price: 104999,
-    priceFormatted: "₹1,04,999",
-    range: "151 km",
-    topSpeed: "90 kmph",
-    chargingTime: "5 hrs",
-    batteryCapacity: "3.0 kWh",
-    motorType: "Hub Motor",
-    description: "Lightweight, practical, and highly efficient. The TARMAC Alpha Lite is designed for the smart city commuter, offering great range and everyday usability.",
-    image: "/images/products/tarmac-alpha-lite.webp",
-    features: ["Flat Floorboard", "Twin Suspension", "Eco & Sports Modes", "Digital Key"],
-  },
-  {
-    id: "3",
-    slug: "tarmac-x1-sport",
-    brand: "TARMAC",
-    model: "X1 Sport",
-    name: "TARMAC X1 Sport",
-    price: 149000,
-    priceFormatted: "₹1,49,000",
-    range: "150 km",
-    topSpeed: "90 kmph",
-    chargingTime: "5.7 hrs",
-    batteryCapacity: "3.7 kWh",
-    motorType: "PMSM",
-    description: "Built for true performance enthusiasts. The TARMAC X1 Sport delivers the quickest acceleration in its class, perfect balance, and an ultra-responsive ride experience.",
-    image: "/images/products/tarmac-x1-sport.webp",
-    features: ["Warp Mode", "Google Maps Integration", "Park Assist", "Aluminium Chassis"],
-  },
-  {
-    id: "4",
-    slug: "tarmac-x1-city",
-    brand: "TARMAC",
-    model: "X1 City",
-    name: "TARMAC X1 City",
-    price: 129000,
-    priceFormatted: "₹1,29,000",
-    range: "115 km",
-    topSpeed: "90 kmph",
-    chargingTime: "8.6 hrs",
-    batteryCapacity: "2.9 kWh",
-    motorType: "PMSM",
-    description: "Accessible performance. Features our revolutionary display and the same legendary handling you expect from TARMAC.",
-    image: "/images/products/tarmac-x1-city.webp",
-    features: ["Digital Display", "FallSafe™", "AutoHold™", "Ride Stats"],
-  },
-  {
-    id: "5",
-    slug: "tarmac-prime-st",
-    brand: "TARMAC",
-    model: "Prime ST",
-    name: "TARMAC Prime ST",
-    price: 138993,
-    priceFormatted: "₹1,38,993",
-    range: "123 km",
-    topSpeed: "82 kmph",
-    chargingTime: "4.5 hrs",
-    batteryCapacity: "3.4 kWh",
-    motorType: "BLDC",
-    description: "The gold standard of family electric scooters. Perfectly silent, comfortable, and reliable ride with enough storage for all your daily needs.",
-    image: "/images/products/tarmac-prime-st.webp",
-    features: ["Q-Park Assist", "32L Underseat Storage", "Smart Connectivity", "Silent Ride"],
-  },
-  {
-    id: "6",
-    slug: "tarmac-classic-premium",
-    brand: "TARMAC",
-    model: "Classic Premium",
-    name: "TARMAC Classic Premium",
-    price: 135000,
-    priceFormatted: "₹1,35,000",
-    range: "126 km",
-    topSpeed: "73 kmph",
-    chargingTime: "4.2 hrs",
-    batteryCapacity: "3.2 kWh",
-    motorType: "BLDC",
-    description: "Classic styling meets modern tech. All-metal body durability and elegant design.",
-    image: "/images/products/tarmac-classic-premium.webp",
-    features: ["All-Metal Body", "Sequential Indicators", "Keyless Drive", "Reverse Assist"],
-  },
-  {
-    id: "7",
-    slug: "tarmac-vanguard-pro",
-    brand: "TARMAC",
-    model: "Vanguard Pro",
-    name: "TARMAC Vanguard Pro",
-    price: 145900,
-    priceFormatted: "₹1,45,900",
-    range: "165 km",
-    topSpeed: "80 kmph",
-    chargingTime: "5.9 hrs",
-    batteryCapacity: "3.9 kWh",
-    motorType: "PMSM",
-    description: "Experience the ultimate convenience of removable batteries. Unmatched peace of mind for your daily commute.",
-    image: "/images/products/tarmac-vanguard-pro.webp",
-    features: ["Removable Batteries", "Custom Riding Modes", "Two-way Throttle", "Keyless Start"],
-  },
-  {
-    id: "8",
-    slug: "tarmac-eco",
-    brand: "TARMAC",
-    model: "Eco",
-    name: "TARMAC Eco",
-    price: 74999,
-    priceFormatted: "₹74,999",
-    range: "121 km",
-    topSpeed: "55 kmph",
-    chargingTime: "6 hrs",
-    batteryCapacity: "2.3 kWh",
-    motorType: "BLDC",
-    description: "The sensible choice for budget-conscious riders. TARMAC Eco offers incredible value, low running costs, and decent range for local errands.",
-    image: "/images/products/tarmac-eco.webp",
-    features: ["Detachable Battery", "Anti-Theft Alarm", "Spacious Legroom", "USB Charger"],
-  }
-];
+
+export const products: Product[] = [];
+
