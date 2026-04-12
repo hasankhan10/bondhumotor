@@ -131,11 +131,17 @@ export default function AdminReviewsPage() {
       </div>
 
       {loading ? (
-        <div className="flex items-center justify-center py-20 text-gray-400">
-          <Loader2 className="w-6 h-6 animate-spin mr-3" />
-          Loading reviews...
+        <div className="flex flex-col items-center justify-center py-32 gap-4 bg-white/5 rounded-[2.5rem] border border-white/5">
+          <div className="relative">
+            <div className="absolute inset-0 bg-brand-blue/20 blur-2xl rounded-full animate-pulse" />
+            <Loader2 className="w-8 h-8 text-brand-blue animate-spin relative z-10" />
+          </div>
+          <p className="text-gray-500 font-bold tracking-widest uppercase text-[10px] animate-pulse">
+            Syncing Reviews...
+          </p>
         </div>
       ) : (
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {reviews.map((review) => (
             <div

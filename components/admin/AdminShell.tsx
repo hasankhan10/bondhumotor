@@ -161,7 +161,15 @@ export function AdminShell({
           <div className="w-10" />
         </div>
 
-        <div className="p-6 lg:p-10">{children}</div>
+        <motion.div
+          key={pathname}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
+          className="p-6 lg:p-10"
+        >
+          {children}
+        </motion.div>
       </main>
     </div>
   );
