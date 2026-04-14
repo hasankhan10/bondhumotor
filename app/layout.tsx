@@ -20,6 +20,12 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Bondhu Motor and Electric | Best Electric Scooty in Dholahat & Jumainaskar",
   description: "Find the best electric scooty near me at Bondhu Motor and Electric. We are the official TARMAC dealer in Jumainaskar Hat, South 24 Parganas. Book your test ride today!",
+  applicationName: "Bondhu Motor and Electric",
+  appleWebApp: {
+    title: "Bondhu Motor and Electric",
+    capable: true,
+    statusBarStyle: "default",
+  },
   keywords: "best electric scooty near me, best electric scooty in dholahat, best electric scooty in jumainaskar, electric scooter South 24 Parganas, TARMAC electric scooty, buy electric scooter West Bengal",
   alternates: {
     canonical: "https://bondhumotorandelectronic.netlify.app"
@@ -47,6 +53,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Website Schema for Site Name indexing
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Bondhu Motor and Electric",
+    "alternateName": ["Bondhu Motor", "Bondhu Electric"],
+    "url": "https://bondhumotorandelectronic.netlify.app"
+  };
+
   // LocalBusiness schema with explicit targeting
   const localBusinessSchema = {
     "@context": "https://schema.org",
@@ -73,6 +88,11 @@ export default function RootLayout({
       className={`${spaceGrotesk.variable} ${inter.variable} antialiased`}
     >
       <body className="min-h-screen bg-background text-foreground flex flex-col font-body transition-colors duration-300">
+        <Script
+          id="website-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
         <Script
           id="local-business-schema"
           type="application/ld+json"
