@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { MessageCircle, MapPin, Clock, PhoneCall, Mail } from "lucide-react";
 
 
