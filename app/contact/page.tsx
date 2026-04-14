@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
-import { MessageCircle, MapPin, Clock, PhoneCall } from "lucide-react";
+import { MessageCircle, MapPin, Clock, PhoneCall, Mail } from "lucide-react";
+
 
 export const metadata: Metadata = {
   title: "Contact Us & Showroom Location | Bondhu Motor",
@@ -47,8 +47,21 @@ export default function ContactPage() {
              </div>
              <div>
                 <h4 className="font-bold text-lg mb-1">Direct Calling</h4>
-                <p className="text-text-muted text-sm mb-2">Available during office hours</p>
-                <a href="tel:+916297944059" className="text-xl font-mono font-semibold text-brand-blue hover:text-brand-green transition-colors">+91 6297 944 059</a>
+                <p className="text-text-muted text-sm mb-2">Available for quick queries</p>
+                <a href="tel:+916297944059" className="text-lg md:text-xl font-mono font-semibold text-brand-blue hover:text-brand-green transition-colors">+91 6297 944 059</a>
+             </div>
+          </div>
+
+          <div className="glass-card p-6 md:p-8 rounded-3xl border-white/10 flex items-start gap-4">
+             <div className="w-10 h-10 shrink-0 rounded-full bg-white/5 flex items-center justify-center mt-1">
+               <Mail className="w-5 h-5 text-brand-green" />
+             </div>
+             <div>
+                <h4 className="font-bold text-lg mb-1">Email Support</h4>
+                <p className="text-text-muted text-sm mb-2">For formal queries & sales</p>
+                <a href="mailto:bondhumotorandelectronic@gmail.com" className="text-sm md:text-base font-medium text-brand-green hover:underline break-all">
+                  bondhumotorandelectronic@gmail.com
+                </a>
              </div>
           </div>
           
@@ -59,9 +72,9 @@ export default function ContactPage() {
              <div>
                 <h4 className="font-bold text-lg mb-1">Showroom Hours</h4>
                 <p className="text-text-muted text-sm">Monday to Sunday<br/>08:00 AM – 08:00 PM</p>
-                <p className="text-brand-green text-xs mt-2 font-semibold">Open All Week</p>
              </div>
           </div>
+
 
         </div>
 
@@ -84,15 +97,16 @@ export default function ContactPage() {
               </div>
               
               <iframe 
-                src="https://maps.google.com/maps?q=Bondhu+Motor+and+Electric,+Jumainaskar+Hat,+South+24+Parganas,+West+Bengal&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3700.287422399255!2d88.27768867605089!3d21.961929255073645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a025103c46d49af%3A0xd4e05c62c9fef138!2sBondhu%20Motor%20And%20Electronic!5e0!3m2!1sen!2sin!4v1776165549485!5m2!1sen!2sin" 
                 width="100%" 
                 height="100%" 
-                style={{ border: 0, minHeight: "350px" }} 
+                style={{ border: 0, minHeight: "380px" }} 
                 allowFullScreen={false} 
                 loading="lazy" 
                 referrerPolicy="no-referrer-when-downgrade"
                 className="w-full flex-1 rounded-2xl overflow-hidden shadow-inner border border-card-border"
               />
+
            </div>
         </div>
 

@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { MessageCircle, MapPin, Clock, Phone } from "lucide-react";
+import { MessageCircle, MapPin, Clock, Phone, Mail } from "lucide-react";
+
 
 export function Footer() {
   return (
@@ -25,10 +25,13 @@ export function Footer() {
                 <MessageCircle className="w-4 h-4 text-brand-green" />
                 <span>+91 6297 944 059</span>
               </a>
-              <div className="flex items-start gap-3 text-sm text-text-muted">
-                <MapPin className="w-4 h-4 text-brand-blue shrink-0 mt-0.5" />
                 <span>Jumainaskar Hat,<br />South 24 Parganas,<br />West Bengal, India</span>
               </div>
+              <a href="mailto:bondhumotorandelectronic@gmail.com" className="flex items-center gap-3 text-sm text-text-muted hover:text-brand-blue transition-colors">
+                <Mail className="w-4 h-4 text-brand-blue" />
+                <span className="break-all">bondhumotorandelectronic@gmail.com</span>
+              </a>
+
               <div className="flex items-center gap-3 text-sm text-text-muted">
                 <Clock className="w-4 h-4 text-brand-blue" />
                 <span>Mon - Sun: 08:00 AM - 08:00 PM</span>

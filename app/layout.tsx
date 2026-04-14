@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     capable: true,
     statusBarStyle: "default",
   },
-  keywords: "best electric scooty near me, best electric scooty in dholahat, best electric scooty in jumainaskar, electric scooter South 24 Parganas, TARMAC electric scooty, buy electric scooter West Bengal",
+  keywords: "best electric scooty near me, best electric scooty in dholahat, best electric scooty in jumainaskar,best electric scooter in jumainaskar, electric scooter South 24 Parganas, TARMAC electric scooty, buy electric scooter West Bengal",
   alternates: {
     canonical: "https://bondhumotorandelectronic.netlify.app"
   },
