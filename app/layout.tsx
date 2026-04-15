@@ -18,7 +18,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Bondhu Motor and Electric | Best Electric Scooty in Dholahat & Jumainaskar",
+  title: "Bondhu Motor and Electric | Best Electric Scooty in Jumainaskar & Dholahat",
   description: "Find the best electric scooty near me at Bondhu Motor and Electric. We are the official TARMAC dealer in Jumainaskar Hat, South 24 Parganas. Book your test ride today!",
   applicationName: "Bondhu Motor and Electric",
   appleWebApp: {
@@ -27,13 +27,19 @@ export const metadata: Metadata = {
     statusBarStyle: "default",
   },
   keywords: "best electric scooty near me, best electric scooty in dholahat, best electric scooty in jumainaskar,best electric scooter in jumainaskar, electric scooter South 24 Parganas, TARMAC electric scooty, buy electric scooter West Bengal",
+  metadataBase: new URL("https://bondhumotorandelectronic.netlify.app"),
   alternates: {
-    canonical: "https://bondhumotorandelectronic.netlify.app"
+    canonical: "/"
+  },
+  icons: {
+    icon: "/icon",
+    apple: "/icon",
+    shortcut: "/icon",
   },
   openGraph: {
     title: "Bondhu Motor and Electric | Best Electric Scooty in Dholahat",
     description: "Official TARMAC EV showroom in Jumainaskar Hat. Find the best electric scooty near me.",
-    url: "https://bondhumotorandelectronic.netlify.app",
+    url: "/",
     siteName: "Bondhu Motor and Electric",
     locale: "en_IN",
     type: "website",
