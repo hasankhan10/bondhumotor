@@ -63,8 +63,8 @@ export default function RootLayout({
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "Bondhu Motor and Electric",
-    "alternateName": ["Bondhu Motor", "Bondhu Electric"],
+    "name": "Bondhu Motor and Electronic",
+    "alternateName": ["Bondhu Motor", "Bondhu Electronic"],
     "url": "https://bondhumotorandelectronic.netlify.app"
   };
 
@@ -72,7 +72,7 @@ export default function RootLayout({
   const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": "AutoDealer",
-    "name": "Bondhu Motor and Electric",
+    "name": "Bondhu Motor and Electronic",
     "url": "https://bondhumotorandelectronic.netlify.app",
     "telephone": "+916297944059",
     "address": {

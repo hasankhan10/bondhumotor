@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Bondhu Motor and Electric',
+    name: 'Bondhu Motor and Electronic',
     short_name: 'Bondhu Motor',
     description: 'Best Electric Scooty in Jumainaskar & Dholahat',
     start_url: '/',
