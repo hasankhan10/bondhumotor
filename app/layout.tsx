@@ -18,11 +18,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Bondhu Motor and Electric | Best Electric Scooty in Jumainaskar & Dholahat",
-  description: "Find the best electric scooty near me at Bondhu Motor and Electric. We are the official TARMAC dealer in Jumainaskar Hat, South 24 Parganas. Book your test ride today!",
-  applicationName: "Bondhu Motor and Electric",
+  title: "Bondhu Motor and Electronic | Best Electric Scooty in Jumainaskar & Dholahat",
+  description: "Find the best electric scooty near me at Bondhu Motor and Electronic. We are the official TARMAC dealer in Jumainaskar Hat, South 24 Parganas. Book your test ride today!",
+  applicationName: "Bondhu Motor and Electronic",
   appleWebApp: {
-    title: "Bondhu Motor and Electric",
+    title: "Bondhu Motor and Electronic",
     capable: true,
     statusBarStyle: "default",
   },
