@@ -32,11 +32,16 @@ export default function AdminGalleryPage() {
 
   const fetchImages = useCallback(async () => {
     setLoading(true);
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from("gallery_images")
       .select("*")
       .order("display_order", { ascending: true });
-    setImages(data || []);
+    
+    if (error) {
+      alert("Failed to load gallery: " + error.message);
+    } else {
+      setImages(data || []);
+    }
     setLoading(false);
   }, [supabase]);
 
@@ -47,30 +52,44 @@ export default function AdminGalleryPage() {
   async function handleAdd() {
     if (!newUrl) return;
     setSaving(true);
-    await supabase.from("gallery_images").insert({
+    const { error } = await supabase.from("gallery_images").insert({
       image_url: newUrl,
       alt_text: newAlt || "Bondhu Motor Showroom",
       display_order: images.length + 1,
     });
-    setNewUrl("");
-    setNewAlt("");
-    setShowAdd(false);
+    
+    if (error) {
+      alert("Error adding photo: " + error.message);
+    } else {
+      setNewUrl("");
+      setNewAlt("");
+      setShowAdd(false);
+      fetchImages();
+    }
     setSaving(false);
-    fetchImages();
   }
 
   async function handleDelete(id: string) {
     if (!confirm("Delete this gallery image?")) return;
-    await supabase.from("gallery_images").delete().eq("id", id);
-    fetchImages();
+    const { error } = await supabase.from("gallery_images").delete().eq("id", id);
+    if (error) {
+      alert("Error deleting image: " + error.message);
+    } else {
+      fetchImages();
+    }
   }
 
   async function toggleVisibility(image: GalleryImage) {
-    await supabase
+    const { error } = await supabase
       .from("gallery_images")
       .update({ is_visible: !image.is_visible })
       .eq("id", image.id);
-    fetchImages();
+    
+    if (error) {
+      alert("Error updating visibility: " + error.message);
+    } else {
+      fetchImages();
+    }
   }
 
   return (

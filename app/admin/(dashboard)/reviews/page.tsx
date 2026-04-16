@@ -37,13 +37,29 @@ export default function AdminReviewsPage() {
 
   const fetchReviews = useCallback(async () => {
     setLoading(true);
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from("reviews")
       .select("*")
       .order("display_order", { ascending: true });
-    setReviews(data || []);
+    
+    if (error) {
+      alert("Failed to load reviews: " + error.message);
+    } else {
+      setReviews(data || []);
+    }
     setLoading(false);
   }, [supabase]);
+
+  useEffect(() => {
+    if (editing) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [editing]);
 
   useEffect(() => {
     fetchReviews();
@@ -85,10 +101,20 @@ export default function AdminReviewsPage() {
       is_visible: editing.is_visible,
     };
 
+    let error;
     if (isNew) {
-      await supabase.from("reviews").insert(payload);
+      const { error: insertError } = await supabase.from("reviews").insert(payload);
+      error = insertError;
     } else {
-      await supabase.from("reviews").update(payload).eq("id", editing.id);
+      const { error: updateError } = await supabase.from("reviews").update(payload).eq("id", editing.id);
+      error = updateError;
+    }
+    
+    if (error) {
+      alert("Error saving review: " + error.message);
+    } else {
+      closeEditor();
+      fetchReviews();
     }
 
     setSaving(false);
@@ -98,16 +124,25 @@ export default function AdminReviewsPage() {
 
   async function handleDelete(id: string) {
     if (!confirm("Delete this review?")) return;
-    await supabase.from("reviews").delete().eq("id", id);
-    fetchReviews();
+    const { error } = await supabase.from("reviews").delete().eq("id", id);
+    if (error) {
+      alert("Error deleting review: " + error.message);
+    } else {
+      fetchReviews();
+    }
   }
 
   async function toggleVisibility(review: Review) {
-    await supabase
+    const { error } = await supabase
       .from("reviews")
       .update({ is_visible: !review.is_visible })
       .eq("id", review.id);
-    fetchReviews();
+    
+    if (error) {
+      alert("Error updating visibility: " + error.message);
+    } else {
+      fetchReviews();
+    }
   }
 
   return (
@@ -205,103 +240,113 @@ export default function AdminReviewsPage() {
         </div>
       )}
 
-      {/* Editor Modal */}
       {editing && (
-        <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
-          <div className="w-full max-w-lg bg-[#0D1117] rounded-3xl border border-white/10 p-8 space-y-6">
-            <div className="flex items-center justify-between">
+        <div className="fixed inset-0 bg-black/60 z-[9999] flex items-center justify-center p-4 backdrop-blur-sm">
+          <div className="w-full max-w-lg bg-[#0D1117] rounded-[2.5rem] border border-white/10 shadow-[0_30px_100px_rgba(0,0,0,0.8)] relative h-[85vh] flex flex-col overflow-hidden">
+            
+            {/* STICKY HEADER */}
+            <div className="flex items-center justify-between p-8 border-b border-white/5 bg-[#0D1117] relative z-20">
               <h2 className="text-xl font-bold text-white">
                 {isNew ? "Add Review" : "Edit Review"}
               </h2>
               <button
                 onClick={closeEditor}
-                className="p-2 rounded-lg hover:bg-white/10 text-gray-400"
+                className="p-2 rounded-lg hover:bg-white/10 text-gray-400 transition-colors"
               >
-                <X className="w-5 h-5" />
+                <X className="w-6 h-6" />
               </button>
             </div>
 
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-300">
-                Review Text
-              </label>
-              <textarea
-                value={editing.text}
-                onChange={(e) =>
-                  setEditing({ ...editing, text: e.target.value })
-                }
-                rows={4}
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm outline-none focus:border-brand-blue transition-colors resize-none"
-              />
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-300">
-                  Stars (1-5)
-                </label>
-                <input
-                  type="number"
-                  min={1}
-                  max={5}
-                  value={editing.stars}
-                  onChange={(e) =>
-                    setEditing({ ...editing, stars: Number(e.target.value) })
-                  }
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm outline-none focus:border-brand-blue transition-colors"
-                />
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-300">
-                  Date Label
-                </label>
-                <input
-                  type="text"
-                  value={editing.date_label}
-                  onChange={(e) =>
-                    setEditing({ ...editing, date_label: e.target.value })
-                  }
-                  placeholder="e.g. 2 days ago"
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm outline-none focus:border-brand-blue transition-colors"
-                />
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <ImageUpload
-                value={editing.image_url}
-                onChange={(url) => setEditing({ ...editing, image_url: url })}
-                bucket="reviews"
-                label="Delivery Photo (Optional)"
-              />
-            </div>
-
-            <label className="flex items-center gap-3 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={editing.is_visible}
-                onChange={(e) =>
-                  setEditing({ ...editing, is_visible: e.target.checked })
-                }
-                className="w-5 h-5 rounded accent-brand-blue"
-              />
-              <span className="text-sm text-gray-300 font-medium">
-                Visible on Website
-              </span>
-            </label>
-
-            <button
-              onClick={handleSave}
-              disabled={saving}
-              className="w-full py-4 bg-gradient-to-r from-brand-blue to-brand-green text-white font-bold rounded-xl hover:opacity-90 transition-opacity flex items-center justify-center gap-2 disabled:opacity-50"
+            {/* SCROLLABLE CONTENT */}
+            <div 
+              onWheel={(e) => e.stopPropagation()}
+              className="flex-1 overflow-y-auto p-8 pt-4 custom-scrollbar space-y-6 min-h-0"
             >
-              {saving ? (
-                <Loader2 className="w-5 h-5 animate-spin" />
-              ) : (
-                <Save className="w-5 h-5" />
-              )}
-              {isNew ? "Add Review" : "Save Changes"}
-            </button>
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-300">
+                  Review Text
+                </label>
+                <textarea
+                  value={editing.text}
+                  onChange={(e) =>
+                    setEditing({ ...editing, text: e.target.value })
+                  }
+                  rows={4}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm outline-none focus:border-brand-blue transition-colors resize-none"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-300">
+                    Stars (1-5)
+                  </label>
+                  <input
+                    type="number"
+                    min={1}
+                    max={5}
+                    value={editing.stars}
+                    onChange={(e) =>
+                      setEditing({ ...editing, stars: Number(e.target.value) })
+                    }
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm outline-none focus:border-brand-blue transition-colors"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-300">
+                    Date Label
+                  </label>
+                  <input
+                    type="text"
+                    value={editing.date_label}
+                    onChange={(e) =>
+                      setEditing({ ...editing, date_label: e.target.value })
+                    }
+                    placeholder="e.g. 2 days ago"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm outline-none focus:border-brand-blue transition-colors"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <ImageUpload
+                  value={editing.image_url}
+                  onChange={(url) => setEditing({ ...editing, image_url: url })}
+                  bucket="reviews"
+                  label="Delivery Photo (Optional)"
+                />
+              </div>
+
+              <label className="flex items-center gap-3 cursor-pointer pb-2">
+                <input
+                  type="checkbox"
+                  checked={editing.is_visible}
+                  onChange={(e) =>
+                    setEditing({ ...editing, is_visible: e.target.checked })
+                  }
+                  className="w-5 h-5 rounded accent-brand-blue"
+                />
+                <span className="text-sm text-gray-300 font-medium">
+                  Visible on Website
+                </span>
+              </label>
+            </div>
+
+            {/* STICKY FOOTER */}
+            <div className="p-8 border-t border-white/5 bg-[#0D1117] relative z-20">
+              <button
+                onClick={handleSave}
+                disabled={saving}
+                className="w-full py-4 bg-gradient-to-r from-brand-blue to-brand-green text-white font-bold rounded-2xl hover:opacity-90 transition-opacity flex items-center justify-center gap-2 disabled:opacity-50"
+              >
+                {saving ? (
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                ) : (
+                  <Save className="w-5 h-5" />
+                )}
+                {isNew ? "Add Review" : "Save Changes"}
+              </button>
+            </div>
           </div>
         </div>
       )}

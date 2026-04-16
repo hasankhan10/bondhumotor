@@ -21,15 +21,20 @@ export default function AdminSettingsPage() {
 
   const fetchSettings = useCallback(async () => {
     setLoading(true);
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from("store_settings")
       .select("*")
       .order("label", { ascending: true });
-    setSettings(data || []);
-    // Initialize editedValues
-    const values: Record<string, string> = {};
-    (data || []).forEach((s) => (values[s.key] = s.value));
-    setEditedValues(values);
+    
+    if (error) {
+      alert("Failed to load settings: " + error.message);
+    } else {
+      setSettings(data || []);
+      // Initialize editedValues
+      const values: Record<string, string> = {};
+      (data || []).forEach((s) => (values[s.key] = s.value));
+      setEditedValues(values);
+    }
     setLoading(false);
   }, [supabase]);
 
@@ -44,16 +49,29 @@ export default function AdminSettingsPage() {
 
   async function handleSaveAll() {
     setSaving(true);
-    const promises = settings.map((s) =>
-      supabase
-        .from("store_settings")
-        .update({ value: editedValues[s.key], updated_at: new Date().toISOString() })
-        .eq("key", s.key)
-    );
-    await Promise.all(promises);
-    setSaving(false);
-    setSaved(true);
-    setTimeout(() => setSaved(false), 3000);
+    try {
+      const results = await Promise.all(
+        settings.map((s) =>
+          supabase
+            .from("store_settings")
+            .update({ value: editedValues[s.key], updated_at: new Date().toISOString() })
+            .eq("key", s.key)
+        )
+      );
+
+      const hasError = results.some((r) => r.error);
+      if (hasError) {
+        const errorMsg = results.find((r) => r.error)?.error?.message;
+        alert("Some settings failed to save: " + errorMsg);
+      } else {
+        setSaved(true);
+        setTimeout(() => setSaved(false), 3000);
+      }
+    } catch (e: any) {
+      alert("Unexpected error: " + e.message);
+    } finally {
+      setSaving(false);
+    }
   }
 
   const settingDescriptions: Record<string, string> = {
