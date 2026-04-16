@@ -8,6 +8,7 @@ import { createClient } from "@/lib/supabase/server";
 import { SpecsTable } from "@/components/SpecsTable";
 import { EMICalculator } from "@/components/EMICalculator";
 import { ProductGallery } from "@/components/ProductGallery";
+import { BreadcrumbSchema } from "@/components/BreadcrumbSchema";
 
 export const dynamic = "force-dynamic";
 
@@ -88,6 +89,13 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
   return (
     <>
+      <BreadcrumbSchema 
+        items={[
+          { name: "Home", item: "/" },
+          { name: "Scooters", item: "/products" },
+          { name: product.name, item: `/products/${product.slug}` },
+        ]} 
+      />
       <Script
         id={`product-jsonld-${product.id}`}
         type="application/ld+json"

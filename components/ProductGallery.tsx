@@ -21,9 +21,12 @@ export function ProductGallery({ images, productName, discount }: ProductGallery
       <div className="w-full aspect-square rounded-[2.5rem] bg-card-bg border border-card-border relative overflow-hidden flex items-center justify-center p-8 group shadow-2xl">
         <div className="absolute inset-0 bg-brand-blue/5 group-hover:bg-brand-blue/10 transition-colors duration-500" />
         
-        <img 
+        <Image 
           src={images[activeImage]} 
           alt={productName} 
+          width={800}
+          height={800}
+          priority
           className="relative z-10 w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] transform transition-transform duration-700 hover:scale-105"
         />
         
@@ -65,7 +68,13 @@ export function ProductGallery({ images, productName, discount }: ProductGallery
                   : "border-white/10 hover:border-white/30"
               }`}
             >
-              <img src={url} alt={`Thumbnail ${i}`} className="w-full h-full object-cover" />
+              <Image 
+                src={url} 
+                alt={`${productName} thumbnail ${i}`} 
+                width={100}
+                height={100}
+                className="w-full h-full object-cover" 
+              />
             </button>
           ))}
         </div>

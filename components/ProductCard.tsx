@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight, Zap, Gauge } from "lucide-react";
 
@@ -53,9 +54,11 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
           <div className="absolute inset-2 bg-gradient-to-t from-brand-blue/20 to-transparent rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           
           <div className="relative w-full h-full flex items-center justify-center p-4">
-            <img 
+            <Image 
               src={product.image} 
               alt={product.name} 
+              width={400}
+              height={300}
               className="w-full h-full object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)] transform group-hover:translate-y-[-10px] transition-transform duration-500"
             />
           </div>

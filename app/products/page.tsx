@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { ProductsGrid } from "@/components/ProductsGrid";
 import { createClient } from "@/lib/supabase/server";
+import { BreadcrumbSchema } from "@/components/BreadcrumbSchema";
+
 
 export const dynamic = "force-dynamic";
 
@@ -19,6 +21,13 @@ export default async function ProductsPage() {
 
   return (
     <div className="container mx-auto px-4 py-12 md:py-20">
+      <BreadcrumbSchema 
+        items={[
+          { name: "Home", item: "/" },
+          { name: "Scooters", item: "/products" },
+        ]} 
+      />
+
       <div className="text-center md:text-left mb-12">
         <h1 className="text-5xl md:text-7xl font-black font-heading tracking-tight mb-4 leading-tight">
           All <span className="text-gradient">Models</span>

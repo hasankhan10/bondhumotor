@@ -32,7 +32,7 @@ export default async function Home() {
     <div className="flex flex-col">
       {/* SEO H1 BLOCK */}
       <h1 className="sr-only">
-        Best electric scooty near me - Official TARMAC Dealer in Dholahat & Jumainaskar, South 24 Parganas.
+        Bondhu Motor and Electronic - Official TARMAC Dealer. Best electric scooty price in Dholahat, Jumainaskar & South 24 Parganas, West Bengal. Book a test ride for the latest EV models.
       </h1>
 
       {/* Hero Section */}
