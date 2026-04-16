@@ -32,9 +32,12 @@ export const metadata: Metadata = {
     canonical: "/"
   },
   icons: {
-    icon: "/icon",
-    apple: "/icon",
-    shortcut: "/icon",
+    icon: [
+      { url: "/favicon.png" },
+      { url: "/logo.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
+    shortcut: "/favicon.png",
   },
   openGraph: {
     title: "Bondhu Motor and Electric | Best Electric Scooty in Dholahat",

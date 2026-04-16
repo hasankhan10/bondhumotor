@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Bolt, Sun, Moon, Lock } from "lucide-react";
+import Image from "next/image";
+import { Menu, X, Sun, Moon, Lock } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useTheme } from "next-themes";
 
@@ -52,8 +53,14 @@ export function Navbar() {
         {/* Left: Logo */}
         <div className="flex items-center justify-start">
           <Link href="/" className="flex items-center gap-2 md:gap-3 group">
-            <div className="relative flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-full bg-card-bg/50 group-hover:bg-brand-blue/20 transition-colors border border-card-border group-hover:border-brand-blue/50">
-              <Bolt className="w-4 h-4 md:w-5 md:h-5 text-brand-blue group-hover:text-brand-green transition-colors" />
+            <div className="relative flex items-center justify-center w-9 h-9 md:w-11 md:h-11 rounded-xl bg-white/5 border border-white/10 group-hover:border-brand-blue/50 overflow-hidden transition-all duration-500 shadow-lg">
+              <Image 
+                src="/logo.png" 
+                alt="Bondhu Motor Logo" 
+                width={44}
+                height={44}
+                className="w-full h-full object-cover scale-110 group-hover:scale-125 transition-transform duration-500"
+              />
             </div>
             <div className="flex flex-col">
               <span className="font-heading font-bold text-base md:text-lg leading-tight tracking-wide text-text-primary">

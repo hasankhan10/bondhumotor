@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { MessageCircle, MapPin, Clock, Phone, Mail } from "lucide-react";
 
 
@@ -9,10 +10,15 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           
           {/* Brand Col */}
-          <div className="space-y-4">
-            <h3 className="font-heading font-bold text-2xl tracking-wide">
-              BONDHU <span className="text-gradient">MOTOR</span>
-            </h3>
+          <div className="space-y-6">
+            <Link href="/" className="flex items-center gap-3 group">
+              <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 overflow-hidden flex items-center justify-center shadow-lg group-hover:border-brand-blue/30 transition-all">
+                <Image src="/logo.png" alt="Bondhu Motor and Electronic Logo" width={48} height={48} className="w-full h-full object-cover scale-110" />
+              </div>
+              <h3 className="font-heading font-bold text-2xl tracking-wide">
+                BONDHU <span className="text-gradient">MOTOR</span>
+              </h3>
+            </Link>
             <p className="text-text-muted text-sm leading-relaxed">
               Your trusted authorished dealer for premium electric scooters in South 24 Parganas. Serving you with top brands, easy EMI, and zero-emission mobility.
             </p>
