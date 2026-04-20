@@ -16,6 +16,7 @@ import {
   Menu,
   PanelLeftClose,
   PanelLeftOpen,
+  Receipt,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -24,6 +25,7 @@ const navItems = [
   { href: "/admin/products", label: "Products", icon: Package },
   { href: "/admin/reviews", label: "Reviews", icon: Star },
   { href: "/admin/gallery", label: "Gallery", icon: Images },
+  { href: "/admin/billing", label: "Billing", icon: Receipt },
   { href: "/admin/settings", label: "Settings", icon: Settings },
 ];
 
