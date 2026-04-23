@@ -61,25 +61,34 @@ export default function BillingPage() {
   const handleDownloadPDF = async () => {
     if (!billRef.current) return;
     try {
-      // html-to-image is better for modern CSS (Tailwind 4)
       const imgData = await toPng(billRef.current, {
         quality: 1.0,
-        pixelRatio: 2,
+        pixelRatio: 3, 
         backgroundColor: "#ffffff",
+        width: 794,
+        // No hardcoded height here to allow full content capture
       });
 
       const pdf = new jsPDF("p", "mm", "a4");
       const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfPageHeight = pdf.internal.pageSize.getHeight();
       
-      // Calculate height to maintain aspect ratio
-      // A standard png from html-to-image is pixels, jspdf needs dimensions
       const img = new Image();
       img.src = imgData;
       await new Promise((resolve) => (img.onload = resolve));
       
-      const pdfHeight = (img.height * pdfWidth) / img.width;
+      let pdfHeight = (img.height * pdfWidth) / img.width;
       
-      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+      // If content overflows A4 height, we scale it down to fit on one page
+      // but only if it's within a reasonable threshold (say 10% overflow)
+      // otherwise we just let it take its natural height.
+      if (pdfHeight > pdfPageHeight) {
+        // Option A: Scale down (better for 1-page memos)
+        pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfPageHeight, undefined, 'FAST');
+      } else {
+        pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight, undefined, 'FAST');
+      }
+      
       pdf.save(`Invoice_${invoiceNo || "Draft"}.pdf`);
     } catch (err) {
       console.error("PDF generation failed", err);
@@ -253,14 +262,14 @@ export default function BillingPage() {
       {/* RIGHT: Live A4 Preview */}
       <div className="lg:w-1/2 flex items-start justify-center overflow-auto custom-scrollbar p-0 lg:p-4 bg-gray-900/50 rounded-[2.5rem] print-area-container">
         {/* A4 Wrapper - Scaled for screen, exact for print */}
-        <div className="print-wrapper bg-white shadow-2xl origin-top relative" ref={billRef}>
+        <div className="print-wrapper bg-white shadow-2xl origin-top relative">
           {/* 
             A4 Dimensions: 210mm x 297mm 
             We use a fixed aspect ratio wrapper with internal absolute positioning 
             to ensure pixel-perfect conversion to PDF and Print.
             Using strict pixel dimensions for the container: 794px x 1123px (A4 at 96 DPI)
           */}
-          <div className="w-[794px] min-h-[1123px] bg-white text-black p-10 flex flex-col font-sans relative box-border mx-auto border border-gray-200">
+          <div className="w-[794px] min-h-[1123px] bg-white text-black p-8 flex flex-col font-sans relative box-border mx-auto border border-gray-200" ref={billRef}>
             
             {/* Background Logo Watermark (Optional, if they have a logo, it looks premium) */}
             <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none">
@@ -306,7 +315,7 @@ export default function BillingPage() {
             </div>
 
             {/* Customer Details Box */}
-            <div className="border border-black p-3 mb-4 text-sm leading-relaxed space-y-2">
+            <div className="border border-black p-2 mb-2 text-sm leading-relaxed space-y-1">
               <div className="grid grid-cols-[1fr_1fr] gap-4">
                 <div>নাম - <span className="font-mono font-bold">{customerName || "..........................................."}</span></div>
                 <div>বাবার নাম - <span className="font-mono">{fatherName || "..........................................."}</span></div>
@@ -332,7 +341,7 @@ export default function BillingPage() {
               </div>
               
               {/* Table Body (Expands to fill) */}
-              <div className="flex-1 flex grid grid-cols-[1fr_100px_150px] relative min-h-[350px]">
+              <div className="flex-1 flex grid grid-cols-[1fr_100px_150px] relative min-h-[300px]">
                 {/* Vertical Separators */}
                 <div className="absolute inset-y-0 left-0 right-[250px] border-r-[2px] border-black pointer-events-none" />
                 <div className="absolute inset-y-0 right-[150px] w-0 border-r-[2px] border-black pointer-events-none" />
@@ -353,8 +362,8 @@ export default function BillingPage() {
 
               {/* Table Footer / Total */}
               <div className="grid grid-cols-[1fr_150px] border-t-[2px] border-black items-center">
-                <div className="p-4 text-center text-xl font-bold tracking-widest text-black">
-                  ধন্যবাদ
+                <div className="p-4 text-center text-sm font-bold border-r-[2px] border-black flex items-center justify-center">
+                  ক্ষতিগ্রস্ত স্কুটার ক্লেম করা যাবে না
                 </div>
                 <div className="border-l-[2px] border-black flex h-full">
                    <div 
@@ -369,7 +378,7 @@ export default function BillingPage() {
             </div>
 
             {/* Signatures */}
-            <div className="mt-4 border border-black p-8 grid grid-cols-2 relative mb-4">
+            <div className="mt-4 border border-black p-6 grid grid-cols-2 relative mb-2">
               <div className="font-bold relative">
                  ক্রেতার স্বাক্ষর -
               </div>

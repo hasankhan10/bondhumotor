@@ -96,15 +96,20 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${spaceGrotesk.variable} ${inter.variable} antialiased`}
     >
-      <body className="min-h-screen bg-background text-foreground flex flex-col font-body transition-colors duration-300">
+      <body 
+        className="min-h-screen bg-background text-foreground flex flex-col font-body transition-colors duration-300"
+        suppressHydrationWarning
+      >
         <Script
           id="website-schema"
           type="application/ld+json"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
         <Script
           id="local-business-schema"
           type="application/ld+json"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
         />
 
