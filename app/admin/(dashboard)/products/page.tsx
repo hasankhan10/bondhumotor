@@ -176,6 +176,39 @@ export default function AdminProductsPage() {
       is_featured: editingProduct.is_featured,
     };
 
+    let finalSlug = payload.slug;
+    
+    if (isNew) {
+      // Check for uniqueness
+      let isUnique = false;
+      let counter = 0;
+      let tempSlug = finalSlug;
+
+      while (!isUnique) {
+        const { data: existing } = await supabase
+          .from("products")
+          .select("id")
+          .eq("slug", tempSlug)
+          .single();
+
+        if (!existing) {
+          isUnique = true;
+          finalSlug = tempSlug;
+        } else {
+          counter++;
+          tempSlug = `${payload.slug}-${counter}`;
+        }
+        
+        // Safety break
+        if (counter > 10) {
+          tempSlug = `${payload.slug}-${Math.random().toString(36).substring(2, 7)}`;
+          isUnique = true;
+          finalSlug = tempSlug;
+        }
+      }
+    }
+
+    payload.slug = finalSlug;
 
     let error;
     if (isNew) {
@@ -191,10 +224,9 @@ export default function AdminProductsPage() {
 
     if (error) {
       alert("Error saving product: " + error.message);
-    } else {
-      closeEditor();
-      fetchProducts();
-    }
+      setSaving(false);
+      return;
+    } 
 
     setSaving(false);
     closeEditor();
