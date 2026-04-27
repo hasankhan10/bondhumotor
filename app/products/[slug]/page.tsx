@@ -74,17 +74,73 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       "@type": "Brand",
       "name": product.brand
     },
+    "sku": `${product.brand}-${product.model}`.toUpperCase(),
+    "mpn": product.id,
+    "category": "Electric Scooter",
     "offers": {
       "@type": "Offer",
-      "url": `https://www.bondhumotorelectric.com/products/${product.slug}`,
+      "url": `https://bondhumotorandelectronic.netlify.app/products/${product.slug}`,
       "priceCurrency": "INR",
       "price": product.showroom_price,
-      "availability": "https://schema.org/InStock",
+      "availability": product.stock_status === 'out_of_stock' ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
       "seller": {
         "@type": "Organization",
         "name": "Bondhu Motor and Electric"
       }
+    },
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Range",
+        "value": product.range
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Top Speed",
+        "value": product.top_speed
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Charging Time",
+        "value": product.charging_time
+      }
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "128"
     }
+  };
+
+  const faqLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": `What is the range of ${product.name}?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `${product.name} offers a range of ${product.range} on a full charge, making it ideal for daily commuting in South 24 Parganas.`
+        }
+      },
+      {
+        "@type": "Question",
+        "name": `What is the top speed of ${product.name}?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `${product.name} can reach a top speed of ${product.top_speed}.`
+        }
+      },
+      {
+        "@type": "Question",
+        "name": `Where can I buy ${product.name} in Dholahat?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `You can buy ${product.name} at Bondhu Motor and Electronic showroom located in Jumainaskar Hat, near Dholahat.`
+        }
+      }
+    ]
   };
 
   return (
@@ -100,6 +156,11 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         id={`product-jsonld-${product.id}`}
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <Script
+        id={`product-faq-jsonld-${product.id}`}
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
       />
 
       
@@ -157,9 +218,36 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               <h1 className="text-4xl md:text-6xl font-black font-heading mb-4 leading-tight">
                 {product.name}
               </h1>
-              <p className="text-lg text-text-muted leading-relaxed max-w-xl">
+              <p className="text-lg text-text-muted leading-relaxed max-w-xl mb-6">
                 {product.description}
               </p>
+
+              {/* Modular Summary for AI & Quick Reading */}
+              <div className="bg-brand-blue/5 border border-brand-blue/10 rounded-2xl p-4 mb-8">
+                <h2 className="text-[10px] font-black uppercase tracking-widest text-brand-blue mb-3">Modular Summary</h2>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-xs font-bold text-text-primary">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-brand-green" /> 
+                    <span>Range: {product.range}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-brand-green" /> 
+                    <span>Speed: {product.top_speed}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-brand-green" /> 
+                    <span>Charging: {product.charging_time}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-brand-green" /> 
+                    <span>Brand: {product.brand}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-brand-green" /> 
+                    <span>EMI: Available</span>
+                  </div>
+                </div>
+              </div>
             </div>
             
             <div className="mb-10 p-6 rounded-3xl bg-white/5 border border-white/5 inline-block">

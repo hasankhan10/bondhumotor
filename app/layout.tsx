@@ -87,7 +87,13 @@ export default function RootLayout({
     },
     "openingHours": "Mo-Su 08:00-20:00",
     "description": "Looking for the best electric scooty near me? We are the official dealer for TARMAC in Dholahat and Jumainaskar.",
-    "areaServed": ["Dholahat", "Jumainaskar", "South 24 Parganas"]
+    "areaServed": ["Dholahat", "Jumainaskar", "South 24 Parganas"],
+    "sameAs": [
+      "https://www.facebook.com/profile.php?id=100083163155700",
+      "https://maps.app.goo.gl/3XmY5YV4uT6S6Kx8A"
+    ],
+    "priceRange": "₹₹",
+    "image": "https://bondhumotorelectric.netlify.app/logo.png"
   };
 
   return (

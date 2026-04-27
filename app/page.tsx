@@ -28,8 +28,44 @@ export default async function Home() {
     .order("display_order", { ascending: true })
     .limit(6);
 
+  const homeFaqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Which is the best electric scooty showroom in Dholahat?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Bondhu Motor and Electronic is the premier electric scooty showroom in the Dholahat and Jumainaskar Hat region, serving as an official TARMAC dealer."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need a driving license for TARMAC electric scooters?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Registration and license requirements depend on the model speed. Low-speed models (below 25 kmph) do not require a license, while high-speed TARMAC models do."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is EMI available for electric scooters at Bondhu Motor?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, we provide flexible EMI options with minimal down payments for all electric scooters at our Jumainaskar Hat showroom."
+        }
+      }
+    ]
+  };
+
   return (
     <div className="flex flex-col">
+      <Script
+        id="home-faq-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeFaqSchema) }}
+      />
       {/* SEO H1 BLOCK */}
       <h1 className="sr-only">
         Bondhu Motor and Electronic - Official TARMAC Dealer. Best electric scooty price in Jumainaskar, Dholahat & South 24 Parganas, West Bengal. Book a test ride for the latest EV models.

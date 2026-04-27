@@ -1,4 +1,27 @@
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /admin/*
 
-Sitemap: https://www.bondhumotorelectric.com/sitemap.xml
+# AI Search Engine Bots (GEO Optimization)
+User-agent: GPTBot
+Allow: /
+Disallow: /admin
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /admin
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /admin
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /admin
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /admin
+
+Sitemap: https://bondhumotorelectric.netlify.app/sitemap.xml
