@@ -6,6 +6,7 @@ import { ProductCard } from "@/components/ProductCard";
 import { FAQAccordion } from "@/components/FAQAccordion";
 import { Reviews } from "@/components/Reviews";
 import { EMICalculator } from "@/components/EMICalculator";
+import Script from "next/script";
 import { cn } from "@/lib/utils";
 
 
