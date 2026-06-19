@@ -274,18 +274,16 @@ export default function BillingPage() {
             {/* Background Logo Watermark (Optional, if they have a logo, it looks premium) */}
             <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none">
               <span className="text-[150px] font-black tracking-widest rotate-[-45deg] text-black">TANIYA</span>
-            </div>
-
-            {/* Header Box */}
+            </div>            {/* Header Box */}
             <div className="border-[3px] border-black p-4 mb-4 relative">
               <div 
                 className="absolute -top-[14px] left-1/2 -translate-x-1/2 px-4 py-1 text-sm font-bold border border-black z-10 w-max"
                 style={{ backgroundColor: "#A5F3FC" }} // cyan-200
               >
-                ক্যাশমেমো
+                CASH MEMO
               </div>
               <div className="flex justify-between items-start pt-2">
-                <div className="font-bold">নং: {invoiceNo || "............."}</div>
+                <div className="font-bold">No: {invoiceNo || "............."}</div>
                 {/* Brand Name */}
               </div>
               
@@ -293,10 +291,10 @@ export default function BillingPage() {
                 <h1 className="text-4xl font-extrabold tracking-tight text-black" style={{ fontFamily: "serif" }}>
                   TANIYA ENTERPRISE
                 </h1>
-                <h2 className="text-xl font-bold mt-2">পরিচালনায় - মিরাজ লস্কর</h2>
-                <h3 className="text-lg font-bold">প্রোঃ এস. বি. লস্কর</h3>
+                <h2 className="text-xl font-bold mt-2">Managed by - Miraj Laskar</h2>
+                <h3 className="text-lg font-bold">Prop. - S. B. Laskar</h3>
                 <p className="text-sm font-semibold mt-2">
-                  শিবনগর মোড় <span className="mx-2">★</span> জুমাই লস্কর রোড <span className="mx-2">★</span> ঢোলাহাট <span className="mx-2">★</span> দঃ ২৪ পরগনা
+                  Shibnagar More <span className="mx-2">★</span> Jumai Laskar Road <span className="mx-2">★</span> Dholahat <span className="mx-2">★</span> South 24 Parganas
                 </p>
               </div>
             </div>
@@ -307,52 +305,52 @@ export default function BillingPage() {
                  <span className="inline-flex items-center justify-center w-4 h-4 border border-black mr-2 shrink-0 font-bold text-xs select-none bg-white text-black">
                    {batteryNo.trim() ? "✓" : ""}
                  </span>
-                 <span>ব্যাটারী নং - <span className="font-mono">{batteryNo || "...................................."}</span></span>
+                 <span>Battery No. - <span className="font-mono">{batteryNo || "...................................."}</span></span>
                </div>
                <div className="flex items-center">
                  <span className="inline-flex items-center justify-center w-4 h-4 border border-black mr-2 shrink-0 font-bold text-xs select-none bg-white text-black">
                    {chassisNo.trim() ? "✓" : ""}
                  </span>
-                 <span>চেসিস নম্বর - <span className="font-mono">{chassisNo || "...................................."}</span></span>
+                 <span>Chassis No. - <span className="font-mono">{chassisNo || "...................................."}</span></span>
                </div>
                <div className="flex items-center">
                  <span className="inline-flex items-center justify-center w-4 h-4 border border-black mr-2 shrink-0 font-bold text-xs select-none bg-white text-black">
                    {controllerNo.trim() ? "✓" : ""}
                  </span>
-                 <span>কন্ট্রোলার নম্বর - <span className="font-mono">{controllerNo || "...................................."}</span></span>
+                 <span>Controller No. - <span className="font-mono">{controllerNo || "...................................."}</span></span>
                </div>
                <div className="flex items-center">
                  <span className="inline-flex items-center justify-center w-4 h-4 border border-black mr-2 shrink-0 font-bold text-xs select-none bg-white text-black">
                    {chargerNo.trim() ? "✓" : ""}
                  </span>
-                 <span>চার্জার নম্বর - <span className="font-mono">{chargerNo || "...................................."}</span></span>
+                 <span>Charger No. - <span className="font-mono">{chargerNo || "...................................."}</span></span>
                </div>
                <div className="col-span-2 flex justify-between items-center">
-                 <span>শোরুম নং 6297944059</span>
+                 <span>Showroom No: 6297944059</span>
                  <div className="flex items-center">
                    <span className="inline-flex items-center justify-center w-4 h-4 border border-black mr-2 shrink-0 font-bold text-xs select-none bg-white text-black">
                      {motorNo.trim() ? "✓" : ""}
                    </span>
-                   <span>মটর নম্বর - <span className="font-mono">{motorNo || "........................"}</span></span>
+                   <span>Motor No. - <span className="font-mono">{motorNo || "........................"}</span></span>
                  </div>
-                 <span>তারিখ - <span className="font-mono">{date ? new Date(date).toLocaleDateString("en-IN") : ".................."}</span></span>
+                 <span>Date - <span className="font-mono">{date ? new Date(date).toLocaleDateString("en-IN") : ".................."}</span></span>
                </div>
             </div>
 
             {/* Customer Details Box */}
             <div className="border border-black p-2 mb-2 text-sm leading-relaxed space-y-1">
               <div className="grid grid-cols-[1fr_1fr] gap-4">
-                <div>নাম - <span className="font-mono font-bold">{customerName || "..........................................."}</span></div>
-                <div>বাবার নাম - <span className="font-mono">{fatherName || "..........................................."}</span></div>
+                <div>Name - <span className="font-mono font-bold">{customerName || "..........................................."}</span></div>
+                <div>Father's Name - <span className="font-mono">{fatherName || "..........................................."}</span></div>
               </div>
               <div className="grid grid-cols-[1fr_1fr_1fr] gap-4">
-                <div>গ্রাম - <span className="font-mono">{village || "......................."}</span></div>
-                <div>থানা - <span className="font-mono">{ps || "......................."}</span></div>
-                <div>আধার নং - <span className="font-mono">{aadhar || "...................."}</span></div>
+                <div>Vill - <span className="font-mono">{village || "......................."}</span></div>
+                <div>P.S. - <span className="font-mono">{ps || "......................."}</span></div>
+                <div>Aadhar No. - <span className="font-mono">{aadhar || "...................."}</span></div>
               </div>
               <div className="grid grid-cols-[1fr_1fr] gap-4">
-                <div>মোবাইল নং - <span className="font-mono">{mobile1 || "..........................................."}</span></div>
-                <div>মোবাইল নং - <span className="font-mono">{mobile2 || "..........................................."}</span></div>
+                <div>Mobile 1 - <span className="font-mono">{mobile1 || "..........................................."}</span></div>
+                <div>Mobile 2 - <span className="font-mono">{mobile2 || "..........................................."}</span></div>
               </div>
             </div>
 
@@ -360,9 +358,9 @@ export default function BillingPage() {
             <div className="flex-1 flex flex-col border-[2px] border-black">
               {/* Table Header */}
               <div className="grid grid-cols-[1fr_100px_150px] border-b-[2px] border-black text-center text-lg font-bold">
-                <div className="border-r-[2px] border-black p-2">বিবরণ</div>
-                <div className="border-r-[2px] border-black p-2">পরিমান</div>
-                <div className="p-2">টাকা</div>
+                <div className="border-r-[2px] border-black p-2">Description</div>
+                <div className="border-r-[2px] border-black p-2">Qty</div>
+                <div className="p-2">Amount</div>
               </div>
               
               {/* Table Body (Expands to fill) */}
@@ -395,7 +393,7 @@ export default function BillingPage() {
                     className="w-full h-full flex items-center justify-between px-4 font-bold text-lg border-t border-b border-l"
                     style={{ backgroundColor: "#A5F3FC", borderColor: "#67E8F9" }} // cyan-200, cyan-300
                    >
-                     <span>মোট -</span>
+                     <span>Total -</span>
                      <span>{totalAmount > 0 ? totalAmount.toLocaleString('en-IN') : ""}</span>
                    </div>
                 </div>
@@ -405,10 +403,10 @@ export default function BillingPage() {
             {/* Signatures */}
             <div className="mt-4 border border-black p-6 grid grid-cols-2 relative mb-2">
               <div className="font-bold relative">
-                 ক্রেতার স্বাক্ষর -
+                 Customer's Signature -
               </div>
               <div className="font-bold text-right relative">
-                 বিক্রেতার স্বাক্ষর -
+                 Seller's Signature -
               </div>
             </div>
 
