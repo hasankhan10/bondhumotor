@@ -273,7 +273,7 @@ export default function BillingPage() {
             
             {/* Background Logo Watermark (Optional, if they have a logo, it looks premium) */}
             <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none">
-              <span className="text-[150px] font-black tracking-widest rotate-[-45deg] text-black">BONDHU</span>
+              <span className="text-[150px] font-black tracking-widest rotate-[-45deg] text-black">TANIYA</span>
             </div>
 
             {/* Header Box */}
@@ -291,7 +291,7 @@ export default function BillingPage() {
               
               <div className="text-center mt-2 space-y-1">
                 <h1 className="text-4xl font-extrabold tracking-tight text-black" style={{ fontFamily: "serif" }}>
-                  বন্ধু মটরস্ এন্ড ইলেকট্রিক
+                  TANIYA ENTERPRISE
                 </h1>
                 <h2 className="text-xl font-bold mt-2">পরিচালনায় - মিরাজ লস্কর</h2>
                 <h3 className="text-lg font-bold">প্রোঃ এস. বি. লস্কর</h3>
@@ -303,13 +303,38 @@ export default function BillingPage() {
 
             {/* Vehicle Details Box - Keeping simple layout matching image */}
             <div className="border border-black p-3 mb-2 text-sm leading-relaxed grid grid-cols-2 gap-x-6 gap-y-2">
-               <div>ব্যাটারী নং - <span className="font-mono">{batteryNo || "...................................."}</span></div>
-               <div>চেসিস নম্বর - <span className="font-mono">{chassisNo || "...................................."}</span></div>
-               <div>কন্ট্রোলার নম্বর - <span className="font-mono">{controllerNo || "...................................."}</span></div>
-               <div>চার্জার নম্বর - <span className="font-mono">{chargerNo || "...................................."}</span></div>
-               <div className="col-span-2 flex justify-between">
+               <div className="flex items-center">
+                 <span className="inline-flex items-center justify-center w-4 h-4 border border-black mr-2 shrink-0 font-bold text-xs select-none bg-white text-black">
+                   {batteryNo.trim() ? "✓" : ""}
+                 </span>
+                 <span>ব্যাটারী নং - <span className="font-mono">{batteryNo || "...................................."}</span></span>
+               </div>
+               <div className="flex items-center">
+                 <span className="inline-flex items-center justify-center w-4 h-4 border border-black mr-2 shrink-0 font-bold text-xs select-none bg-white text-black">
+                   {chassisNo.trim() ? "✓" : ""}
+                 </span>
+                 <span>চেসিস নম্বর - <span className="font-mono">{chassisNo || "...................................."}</span></span>
+               </div>
+               <div className="flex items-center">
+                 <span className="inline-flex items-center justify-center w-4 h-4 border border-black mr-2 shrink-0 font-bold text-xs select-none bg-white text-black">
+                   {controllerNo.trim() ? "✓" : ""}
+                 </span>
+                 <span>কন্ট্রোলার নম্বর - <span className="font-mono">{controllerNo || "...................................."}</span></span>
+               </div>
+               <div className="flex items-center">
+                 <span className="inline-flex items-center justify-center w-4 h-4 border border-black mr-2 shrink-0 font-bold text-xs select-none bg-white text-black">
+                   {chargerNo.trim() ? "✓" : ""}
+                 </span>
+                 <span>চার্জার নম্বর - <span className="font-mono">{chargerNo || "...................................."}</span></span>
+               </div>
+               <div className="col-span-2 flex justify-between items-center">
                  <span>শোরুম নং 6297944059</span>
-                 <span>মটর নম্বর - <span className="font-mono">{motorNo || "........................"}</span></span>
+                 <div className="flex items-center">
+                   <span className="inline-flex items-center justify-center w-4 h-4 border border-black mr-2 shrink-0 font-bold text-xs select-none bg-white text-black">
+                     {motorNo.trim() ? "✓" : ""}
+                   </span>
+                   <span>মটর নম্বর - <span className="font-mono">{motorNo || "........................"}</span></span>
+                 </div>
                  <span>তারিখ - <span className="font-mono">{date ? new Date(date).toLocaleDateString("en-IN") : ".................."}</span></span>
                </div>
             </div>
@@ -362,8 +387,8 @@ export default function BillingPage() {
 
               {/* Table Footer / Total */}
               <div className="grid grid-cols-[1fr_150px] border-t-[2px] border-black items-center">
-                <div className="p-4 text-center text-sm font-bold border-r-[2px] border-black flex items-center justify-center">
-                  ক্ষতিগ্রস্ত স্কুটার ক্লেম করা যাবে না
+                <div className="p-3 text-left text-[11px] font-bold border-r-[2px] border-black leading-tight">
+                শর্তাবলী : কোন অ্যাক্সিডেন্ট গাড়ি ওয়ারেন্টি থাকিবে না, ফলা ব্যাটারি কেলেম হবে না। সার্ভিস ফ্রি তবে একবার আর মেটেরিয়ালস এর দাম বহন করিতে হইবে। ওয়ারান্টি গাড়ি কেলেম করিলে 15 দিন বা তার বেশি সময় লাগবে।
                 </div>
                 <div className="border-l-[2px] border-black flex h-full">
                    <div 
